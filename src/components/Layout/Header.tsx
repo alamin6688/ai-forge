@@ -36,12 +36,15 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <button className="text-foreground hover:text-primary transition-colors">
+            <Link to="/auth/login" className="text-foreground hover:text-primary transition-colors">
               Login
-            </button>
-            <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+            </Link>
+            <Link 
+              to="/auth/signup" 
+              className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors"
+            >
               Sign Up
-            </button>
+            </Link>
           </div>
 
           <button
@@ -70,12 +73,15 @@ const Header = () => {
                 Pricing
               </Link>
               <div className="flex flex-col space-y-2 pt-2">
-                <button className="text-foreground hover:text-primary transition-colors text-left">
+                <Link to="/auth/login" className="text-foreground hover:text-primary transition-colors text-left">
                   Login
-                </button>
-                <button className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
+                </Link>
+                <Link 
+                  to="/auth/signup" 
+                  className="bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-center"
+                >
                   Sign Up
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
