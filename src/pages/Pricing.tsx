@@ -7,11 +7,11 @@ import Footer from "../components/Layout/Footer";
 const plans = [
   {
     name: "Free",
-    price: "৳০",
+    price: "$0",
     period: "/month",
-    description: "Basic tools এর জন্য perfect",
+    description: "Perfect for trying out basic tools",
     features: [
-      "৫০টি credits monthly",
+      "50 credits monthly",
       "Basic paraphrasing",
       "Standard summarizer",
       "Community support",
@@ -26,11 +26,11 @@ const plans = [
   },
   {
     name: "Starter",
-    price: "৳২৯৯",
+    price: "$9",
     period: "/month",
-    description: "Small businesses এবং freelancers এর জন্য",
+    description: "For small businesses and freelancers",
     features: [
-      "৫০০টি credits monthly",
+      "500 credits monthly",
       "Advanced paraphrasing",
       "Smart summarizer",
       "Caption generator",
@@ -47,11 +47,11 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "৳৭৯৯",
+    price: "$29",
     period: "/month",
-    description: "Large teams এবং agencies এর জন্য",
+    description: "For large teams and agencies",
     features: [
-      "২০০০টি credits monthly",
+      "2000 credits monthly",
       "All premium features",
       "Custom tone options",
       "Bulk processing",
@@ -74,7 +74,7 @@ const comparisonFeatures = [
     category: "Core Features",
     features: [
       { name: "Monthly Credits", free: "50", starter: "500", pro: "2000" },
-      { name: "Bangla Paraphraser", free: "Basic", starter: "Advanced", pro: "Premium" },
+      { name: "English Paraphraser", free: "Basic", starter: "Advanced", pro: "Premium" },
       { name: "Text Summarizer", free: "Standard", starter: "Smart", pro: "AI-Powered" },
       { name: "Caption Generator", free: "❌", starter: "✅", pro: "✅" },
     ]
@@ -116,7 +116,7 @@ const Pricing = () => {
               Simple, Transparent Pricing
             </h1>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              আপনার needs অনুযায়ী perfect plan choose করুন। সব plans এ ৭-day free trial পাবেন।
+              Choose the perfect plan for your content creation needs. All plans include a 7-day free trial.
             </p>
           </motion.div>
         </section>
@@ -197,7 +197,7 @@ const Pricing = () => {
               Feature Comparison
             </h2>
             <p className="text-muted-foreground">
-              সব features এর detailed comparison দেখুন
+              See detailed comparison of all features across plans
             </p>
           </motion.div>
 
@@ -249,20 +249,20 @@ const Pricing = () => {
           >
             {[
               {
-                q: "কিভাবে payment করব?",
-                a: "আমরা Stripe, Bkash এবং অন্যান্য local payment methods support করি।"
+                q: "How do I make payments?",
+                a: "We support Stripe, PayPal, and other major payment methods for your convenience."
               },
               {
-                q: "Free trial কতদিনের?",
-                a: "সব paid plans এ ৭ দিনের free trial পাবেন। কোন commitment নেই।"
+                q: "How long is the free trial?",
+                a: "All paid plans include a 7-day free trial. No commitment required."
               },
               {
-                q: "Credits expire হয় কি?",
-                a: "Monthly credits প্রতি মাসে reset হয়। Unused credits carry forward হয় না।"
+                q: "Do credits expire?",
+                a: "Monthly credits reset each month. Unused credits don't carry forward."
               },
               {
-                q: "Plan change করতে পারব?",
-                a: "যেকোনো সময় plan upgrade বা downgrade করতে পারবেন।"
+                q: "Can I change my plan anytime?",
+                a: "Yes, you can upgrade or downgrade your plan at any time from your dashboard."
               }
             ].map((faq, index) => (
               <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
@@ -286,7 +286,7 @@ const Pricing = () => {
                 Ready to get started?
               </h2>
               <p className="text-xl text-blue-100 mb-8">
-                আজই শুরু করুন এবং আপনার productivity বাড়ান
+                Start creating better content today and boost your productivity
               </p>
               <button className="bg-white text-primary px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
                 Start Free Trial

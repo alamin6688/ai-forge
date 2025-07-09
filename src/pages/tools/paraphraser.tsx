@@ -5,7 +5,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, RefreshCw, Wand2 } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "@/hooks/use-toast";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 
@@ -19,7 +19,7 @@ const Paraphraser = () => {
     if (!inputText.trim()) {
       toast({
         title: "Input Required",
-        description: "আপনার text input করুন paraphrase করার জন্য।",
+        description: "Please enter your text to paraphrase.",
         variant: "destructive"
       });
       return;
@@ -27,22 +27,43 @@ const Paraphraser = () => {
 
     setIsLoading(true);
     
-    // Simulate API call
+    // Simulate API call with English-focused processing
     setTimeout(() => {
-      setOutputText(`[${tone} tone]: ${inputText} এর paraphrased version এখানে থাকবে। এটি একটি demo output।`);
+      const mockOutput = generateMockParaphrase(inputText, tone);
+      setOutputText(mockOutput);
       setIsLoading(false);
       toast({
         title: "Success!",
-        description: "Text successfully paraphrased।"
+        description: "Text successfully paraphrased."
       });
     }, 2000);
+  };
+
+  const generateMockParaphrase = (text: string, selectedTone: string) => {
+    // Mock paraphrasing logic for demonstration
+    const sentences = text.split('. ');
+    const paraphrased = sentences.map(sentence => {
+      if (selectedTone === "formal") {
+        return sentence.replace(/we're/gi, "we are")
+          .replace(/can't/gi, "cannot")
+          .replace(/don't/gi, "do not")
+          .replace(/won't/gi, "will not");
+      } else if (selectedTone === "casual") {
+        return sentence.replace(/therefore/gi, "so")
+          .replace(/furthermore/gi, "also")
+          .replace(/however/gi, "but");
+      }
+      return sentence;
+    });
+    
+    return `${paraphrased.join('. ')}. [Paraphrased in ${selectedTone} tone]`;
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(outputText);
     toast({
       title: "Copied!",
-      description: "Output copied to clipboard।"
+      description: "Output copied to clipboard."
     });
   };
 
@@ -58,10 +79,10 @@ const Paraphraser = () => {
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold text-foreground mb-4">
-            Bangla Paraphraser
+            English Paraphraser
           </h1>
           <p className="text-xl text-muted-foreground">
-            আপনার বাংলা content রিরাইট করুন different tone ও style এ
+            Rewrite your English content in different tones and styles
           </p>
         </motion.div>
 
@@ -90,7 +111,7 @@ const Paraphraser = () => {
             </div>
             
             <Textarea
-              placeholder="আপনার বাংলা text এখানে paste করুন..."
+              placeholder="Enter your English text here to paraphrase..."
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               className="min-h-[300px] resize-none"
@@ -127,7 +148,7 @@ const Paraphraser = () => {
             className="space-y-4"
           >
             <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold text-foreground">Output Text</h3>
+              <h3 className="text-lg font-semibold text-foreground">Paraphrased Text</h3>
               {outputText && (
                 <button
                   onClick={copyToClipboard}
@@ -144,7 +165,7 @@ const Paraphraser = () => {
                 <p className="text-foreground leading-relaxed">{outputText}</p>
               ) : (
                 <p className="text-muted-foreground italic">
-                  Paraphrased text এখানে দেখাবে...
+                  Paraphrased text will appear here...
                 </p>
               )}
             </div>
@@ -168,7 +189,7 @@ const Paraphraser = () => {
             Need More Credits?
           </h3>
           <p className="text-muted-foreground mb-4">
-            Upgrade to Pro plan for unlimited paraphrasing এবং advanced features।
+            Upgrade to Pro plan for unlimited paraphrasing and advanced features.
           </p>
           <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
             Upgrade Now

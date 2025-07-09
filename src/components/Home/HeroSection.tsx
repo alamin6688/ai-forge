@@ -20,7 +20,7 @@ const HeroSection = () => {
           >
             <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-blue-200">
               <Sparkles className="h-4 w-4 text-blue-600" />
-              <span className="text-sm font-medium text-blue-600">AI-Powered Tools for Bangladesh</span>
+              <span className="text-sm font-medium text-blue-600">AI-Powered English Content Tools</span>
             </div>
           </motion.div>
 
@@ -32,7 +32,7 @@ const HeroSection = () => {
           >
             <span className="gradient-text">AI Tools</span> for
             <br />
-            <span className="text-gray-700">বাংলা Content</span>
+            <span className="text-gray-700">English Content</span>
           </motion.h1>
 
           <motion.p
@@ -41,8 +41,8 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"
           >
-            Paraphrase, summarize, and generate content in Bangla with our advanced AI tools. 
-            Perfect for students, creators, and professionals.
+            Paraphrase, summarize, and generate professional English content with our advanced AI tools. 
+            Perfect for writers, students, and content creators worldwide.
           </motion.p>
 
           <motion.div
@@ -59,9 +59,12 @@ const HeroSection = () => {
               <ArrowRight className="h-5 w-5" />
             </Link>
             
-            <button className="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-colors">
-              Watch Demo
-            </button>
+            <Link
+              to="/developer"
+              className="border border-gray-300 text-gray-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-gray-50 transition-colors"
+            >
+              Developer API
+            </Link>
           </motion.div>
 
           <motion.div
@@ -70,7 +73,7 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="mt-12 text-sm text-gray-500"
           >
-            ✨ No credit card required • 🚀 Get started in seconds • 🎯 Built for Bangladesh
+            ✨ No credit card required • 🚀 Get started in seconds • 🌍 Built for global content creators
           </motion.div>
         </div>
       </div>

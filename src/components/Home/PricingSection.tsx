@@ -7,11 +7,11 @@ import { Check, Star } from "lucide-react";
 const plans = [
   {
     name: "Free",
-    price: "৳০",
+    price: "$0",
     period: "/month",
-    description: "Basic tools এর জন্য perfect",
+    description: "Perfect for trying out basic tools",
     features: [
-      "৫০টি credits monthly",
+      "50 credits monthly",
       "Basic paraphrasing",
       "Standard summarizer",
       "Community support"
@@ -21,11 +21,11 @@ const plans = [
   },
   {
     name: "Starter",
-    price: "৳২৯৯",
+    price: "$9",
     period: "/month",
-    description: "Small businesses এবং freelancers এর জন্য",
+    description: "For small businesses and freelancers",
     features: [
-      "৫০০টি credits monthly",
+      "500 credits monthly",
       "Advanced paraphrasing",
       "Smart summarizer",
       "Caption generator",
@@ -37,11 +37,11 @@ const plans = [
   },
   {
     name: "Pro",
-    price: "৳৭৯৯",
+    price: "$29",
     period: "/month",
-    description: "Large teams এবং agencies এর জন্য",
+    description: "For large teams and agencies",
     features: [
-      "২০০০টি credits monthly",
+      "2000 credits monthly",
       "All premium features",
       "Custom tone options",
       "Bulk processing",
@@ -69,7 +69,7 @@ const PricingSection = () => {
             Simple, Transparent Pricing
           </h2>
           <p className="text-xl text-gray-600">
-            আপনার needs অনুযায়ী perfect plan choose করুন
+            Choose the perfect plan for your content creation needs
           </p>
         </motion.div>
 
@@ -136,7 +136,7 @@ const PricingSection = () => {
           className="text-center mt-12"
         >
           <p className="text-gray-600">
-            সব plans এ ৭-day free trial • No commitment • Cancel anytime
+            All plans include 7-day free trial • No commitment • Cancel anytime
           </p>
         </motion.div>
       </div>
