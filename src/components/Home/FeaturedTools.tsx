@@ -1,4 +1,3 @@
-
 "use client";
 
 import { motion } from "framer-motion";
@@ -8,8 +7,8 @@ import { Link } from "react-router-dom";
 const tools = [
   {
     icon: FileText,
-    title: "Bangla Paraphraser",
-    description: "আপনার বাংলা কন্টেন্ট রিরাইট করুন professional ও casual tone এ।",
+    title: "English Paraphraser",
+    description: "Rewrite your English content in professional, casual, or creative tones while maintaining original meaning.",
     features: ["Multiple tone options", "Context preservation", "Grammar correction"],
     href: "/tools/paraphraser",
     color: "blue"
@@ -17,15 +16,15 @@ const tools = [
   {
     icon: Zap,
     title: "Smart Summarizer",
-    description: "Long articles এবং documents এর quick summary পান ৩-৫ bullet points এ।",
-    features: ["Key points extraction", "Bangla & English", "Adjustable length"],
+    description: "Get quick summaries of long articles and documents in 3-5 key bullet points for faster comprehension.",
+    features: ["Key points extraction", "Adjustable length", "Professional format"],
     href: "/tools/summarizer",
     color: "purple"
   },
   {
     icon: MessageSquare,
     title: "Caption Generator",
-    description: "Social media posts এর জন্য engaging captions তৈরি করুন emojis সহ।",
+    description: "Create engaging social media captions with emojis and hashtags for maximum audience engagement.",
     features: ["Platform optimized", "Emoji integration", "Hashtag suggestions"],
     href: "/tools/caption-generator",
     color: "green"
@@ -47,7 +46,7 @@ const FeaturedTools = () => {
             Powerful AI Tools
           </h2>
           <p className="text-xl text-gray-600">
-            Choose from our collection of specialized tools designed for Bangladeshi content creators
+            Choose from our collection of specialized tools designed for English content creators worldwide
           </p>
         </motion.div>
 
