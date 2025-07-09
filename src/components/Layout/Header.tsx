@@ -30,6 +30,9 @@ const Header = () => {
             <Link to="/tools/paraphraser" className="text-foreground hover:text-primary transition-colors">
               Tools
             </Link>
+            <Link to="/developer" className="text-foreground hover:text-primary transition-colors">
+              Developers
+            </Link>
             <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
               Pricing
             </Link>
@@ -68,6 +71,9 @@ const Header = () => {
               </Link>
               <Link to="/tools/paraphraser" className="text-foreground hover:text-primary transition-colors">
                 Tools
+              </Link>
+              <Link to="/developer" className="text-foreground hover:text-primary transition-colors">
+                Developers
               </Link>
               <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
                 Pricing
