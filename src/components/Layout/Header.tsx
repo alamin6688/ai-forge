@@ -27,7 +27,7 @@ const Header = () => {
             <Link to="/" className="text-foreground hover:text-primary transition-colors">
               Home
             </Link>
-            <Link to="/tools/paraphraser" className="text-foreground hover:text-primary transition-colors">
+            <Link to="/tools" className="text-foreground hover:text-primary transition-colors">
               Tools
             </Link>
             <Link to="/developer" className="text-foreground hover:text-primary transition-colors">
@@ -69,7 +69,7 @@ const Header = () => {
               <Link to="/" className="text-foreground hover:text-primary transition-colors">
                 Home
               </Link>
-              <Link to="/tools/paraphraser" className="text-foreground hover:text-primary transition-colors">
+              <Link to="/tools" className="text-foreground hover:text-primary transition-colors">
                 Tools
               </Link>
               <Link to="/developer" className="text-foreground hover:text-primary transition-colors">
