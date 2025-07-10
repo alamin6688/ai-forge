@@ -9,10 +9,12 @@ export const toolsList = [
     isFree: true,
     requiresCredits: true,
     plan: "free",
-    openInModal: false
+    openInModal: false,
+    category: "Writing",
+    features: ["Multiple tones", "Preserve meaning", "Character limit tracking"]
   },
   {
-    name: "Smart Summarizer",
+    name: "Smart Summarizer", 
     slug: "summarizer",
     icon: "📄",
     description: "Get quick summaries of long articles in bullet points",
@@ -20,29 +22,35 @@ export const toolsList = [
     isFree: true,
     requiresCredits: true,
     plan: "free",
-    openInModal: false
+    openInModal: false,
+    category: "Writing",
+    features: ["Bullet points", "Key insights", "Length control"]
   },
   {
     name: "Caption Generator",
-    slug: "caption-generator",
+    slug: "caption-generator", 
     icon: "💡",
     description: "Create engaging social media captions with emojis",
     authRequired: false,
     isFree: true,
     requiresCredits: false,
     plan: "free",
-    openInModal: true
+    openInModal: true,
+    category: "Social Media",
+    features: ["Emoji integration", "Platform specific", "Hashtag suggestions"]
   },
   {
     name: "Text to Image",
     slug: "text-to-image",
-    icon: "🖼️",
+    icon: "🖼️", 
     description: "Generate stunning images from text descriptions",
     authRequired: true,
     isFree: false,
     requiresCredits: true,
     plan: "pro",
-    openInModal: false
+    openInModal: false,
+    category: "Creative",
+    features: ["AI generated", "High quality", "Custom styles"]
   },
   {
     name: "Voice Generator",
@@ -52,8 +60,10 @@ export const toolsList = [
     authRequired: true,
     isFree: false,
     requiresCredits: true,
-    plan: "pro",
-    openInModal: false
+    plan: "pro", 
+    openInModal: false,
+    category: "Audio",
+    features: ["Natural voices", "Multiple languages", "Speed control"]
   },
   {
     name: "PDF Summarizer",
@@ -64,6 +74,47 @@ export const toolsList = [
     isFree: false,
     requiresCredits: true,
     plan: "pro",
-    openInModal: false
+    openInModal: false,
+    category: "Documents",
+    features: ["Upload PDFs", "Key insights", "Export summaries"]
+  },
+  {
+    name: "QR Code Generator",
+    slug: "qr-generator",
+    icon: "📱",
+    description: "Generate QR codes for URLs, text, and more",
+    authRequired: false,
+    isFree: true,
+    requiresCredits: false,
+    plan: "free",
+    openInModal: true,
+    category: "Utilities",
+    features: ["Multiple formats", "Custom design", "Download options"]
+  },
+  {
+    name: "Color Palette Generator",
+    slug: "color-palette",
+    icon: "🎨",
+    description: "Create beautiful color palettes for your designs",
+    authRequired: false,
+    isFree: true,
+    requiresCredits: false,
+    plan: "free",
+    openInModal: true,
+    category: "Design",
+    features: ["Color harmony", "Export formats", "Accessibility check"]
+  },
+  {
+    name: "Password Generator",
+    slug: "password-generator",
+    icon: "🔐",
+    description: "Generate secure passwords with custom criteria",
+    authRequired: false,
+    isFree: true,
+    requiresCredits: false,
+    plan: "free",
+    openInModal: true,
+    category: "Security",
+    features: ["Custom length", "Special characters", "Strength meter"]
   }
 ];

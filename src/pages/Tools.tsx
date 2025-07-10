@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import ToolModal from '../components/tools/ToolModal';
 
 const Tools = () => {
   const navigate = useNavigate();
@@ -17,6 +17,8 @@ const Tools = () => {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
   const [selectedTool, setSelectedTool] = useState(null);
+  const [selectedToolForModal, setSelectedToolForModal] = useState(null);
+  const [isToolModalOpen, setIsToolModalOpen] = useState(false);
 
   // Mock auth check - replace with your actual auth logic
   useEffect(() => {
@@ -54,8 +56,8 @@ const Tools = () => {
 
     // Open tool
     if (tool.openInModal) {
-      // Handle modal opening logic here
-      console.log('Opening tool in modal:', tool.name);
+      setSelectedToolForModal(tool);
+      setIsToolModalOpen(true);
     } else {
       navigate(`/tools/${tool.slug}`);
     }
@@ -146,6 +148,11 @@ const Tools = () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="pt-0">
+                  <div className="mb-3">
+                    <Badge variant="outline" className="text-xs">
+                      {tool.category}
+                    </Badge>
+                  </div>
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                       {tool.requiresCredits && (
@@ -168,6 +175,16 @@ const Tools = () => {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Tool Modal */}
+        <ToolModal
+          tool={selectedToolForModal}
+          isOpen={isToolModalOpen}
+          onClose={() => {
+            setIsToolModalOpen(false);
+            setSelectedToolForModal(null);
+          }}
+        />
 
         {/* Upgrade Modal */}
         <Dialog open={showUpgradeModal} onOpenChange={setShowUpgradeModal}>
