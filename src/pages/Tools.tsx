@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -10,9 +11,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } f
 
 const Tools = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // This should come from your auth context
-  const [userPlan, setUserPlan] = useState('free'); // This should come from your auth context
-  const [userCredits, setUserCredits] = useState(10); // This should come from your auth context
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [userPlan, setUserPlan] = useState('free');
+  const [userCredits, setUserCredits] = useState(10);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
   const [showCreditsModal, setShowCreditsModal] = useState(false);
   const [selectedTool, setSelectedTool] = useState(null);
@@ -86,11 +87,7 @@ const Tools = () => {
     hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut"
-      }
+      y: 0
     }
   };
 
@@ -124,6 +121,10 @@ const Tools = () => {
             <motion.div
               key={tool.slug}
               variants={cardVariants}
+              transition={{ 
+                duration: 0.5,
+                ease: "easeOut" 
+              }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="cursor-pointer"
