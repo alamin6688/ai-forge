@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { X, Star, Lock, Zap, CreditCard } from 'lucide-react';
+import { Star, CreditCard } from 'lucide-react';
 import { toolsList } from '../data/toolsList';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import ToolModal from '../components/tools/ToolModal';
+import ToolsGrid from '../components/tools/ToolsGrid';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 
@@ -66,36 +65,6 @@ const Tools = () => {
     }
   };
 
-  const getBadgeVariant = (tool) => {
-    if (!tool.isFree) return 'destructive';
-    if (tool.authRequired) return 'secondary';
-    return 'default';
-  };
-
-  const getBadgeText = (tool) => {
-    if (!tool.isFree && tool.plan === 'pro') return 'Pro Only';
-    if (tool.authRequired) return 'Login Required';
-    return 'Free';
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0
-    }
-  };
-
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -118,69 +87,7 @@ const Tools = () => {
           </motion.div>
 
           {/* Tools Grid */}
-          <motion.div
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          >
-            {toolsList.map((tool, index) => (
-              <motion.div
-                key={tool.slug}
-                variants={cardVariants}
-                transition={{ 
-                  duration: 0.5,
-                  ease: "easeOut" 
-                }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="cursor-pointer"
-                onClick={() => handleToolClick(tool)}
-              >
-                <Card className="h-full hover:shadow-lg transition-shadow duration-300 bg-white/80 backdrop-blur-sm border border-gray-200">
-                  <CardHeader className="text-center">
-                    <div className="text-4xl mb-3">{tool.icon}</div>
-                    <div className="flex justify-between items-start">
-                      <CardTitle className="text-xl font-semibold text-gray-800">
-                        {tool.name}
-                      </CardTitle>
-                      <Badge variant={getBadgeVariant(tool)} className="ml-2">
-                        {getBadgeText(tool)}
-                      </Badge>
-                    </div>
-                    <CardDescription className="text-gray-600 mt-2">
-                      {tool.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="pt-0">
-                    <div className="mb-3">
-                      <Badge variant="outline" className="text-xs">
-                        {tool.category}
-                      </Badge>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <div className="flex items-center space-x-2 text-sm text-gray-500">
-                        {tool.requiresCredits && (
-                          <div className="flex items-center">
-                            <Zap className="h-4 w-4 mr-1" />
-                            <span>Uses credits</span>
-                          </div>
-                        )}
-                      </div>
-                      <Button 
-                        variant="default" 
-                        size="sm"
-                        className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
-                      >
-                        {tool.openInModal ? 'Try Now' : 'Open Tool'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+          <ToolsGrid tools={toolsList} onToolClick={handleToolClick} />
 
           {/* Tool Modal */}
           <ToolModal
