@@ -10,6 +10,8 @@ import ToolModal from '../components/tools/ToolModal';
 import ToolsGrid from '../components/tools/ToolsGrid';
 import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
+import { PageLoader } from '@/components/ui/page-loader';
+import { CardLoader } from '@/components/ui/card-loader';
 
 const Tools = () => {
   const navigate = useNavigate();
@@ -21,21 +23,32 @@ const Tools = () => {
   const [selectedTool, setSelectedTool] = useState(null);
   const [selectedToolForModal, setSelectedToolForModal] = useState(null);
   const [isToolModalOpen, setIsToolModalOpen] = useState(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+  const [isToolsLoading, setIsToolsLoading] = useState(false);
 
   // Mock auth check - replace with your actual auth logic
   useEffect(() => {
-    // Check authentication status
-    const token = localStorage.getItem('authToken');
-    setIsAuthenticated(!!token);
-    
-    // Mock user data - replace with actual API calls
-    if (token) {
-      setUserPlan('free'); // or 'pro'
-      setUserCredits(10);
-    }
+    const initializeApp = async () => {
+      // Simulate initial app loading
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // Check authentication status
+      const token = localStorage.getItem('authToken');
+      setIsAuthenticated(!!token);
+      
+      // Mock user data - replace with actual API calls
+      if (token) {
+        setUserPlan('free'); // or 'pro'
+        setUserCredits(10);
+      }
+      
+      setIsInitialLoading(false);
+    };
+
+    initializeApp();
   }, []);
 
-  const handleToolClick = (tool) => {
+  const handleToolClick = async (tool) => {
     // Check authentication requirement
     if (tool.authRequired && !isAuthenticated) {
       navigate('/auth/login');
@@ -56,14 +69,24 @@ const Tools = () => {
       return;
     }
 
-    // Open tool
+    // Simulate loading when opening tool
     if (tool.openInModal) {
+      setIsToolsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 800));
       setSelectedToolForModal(tool);
       setIsToolModalOpen(true);
+      setIsToolsLoading(false);
     } else {
+      // Show loading overlay during navigation
+      setIsToolsLoading(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
       navigate(`/tools/${tool.slug}`);
     }
   };
+
+  if (isInitialLoading) {
+    return <PageLoader message="Loading AI Tools..." />;
+  }
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -86,8 +109,12 @@ const Tools = () => {
             </p>
           </motion.div>
 
-          {/* Tools Grid */}
-          <ToolsGrid tools={toolsList} onToolClick={handleToolClick} />
+          {/* Tools Grid with Loading */}
+          {isToolsLoading ? (
+            <CardLoader count={6} />
+          ) : (
+            <ToolsGrid tools={toolsList} onToolClick={handleToolClick} />
+          )}
 
           {/* Tool Modal */}
           <ToolModal

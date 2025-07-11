@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from "react";
@@ -8,12 +7,15 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "@/hooks/use-toast";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
+import { LoadingButton } from "@/components/ui/loading-button";
+import { LoadingOverlay } from "@/components/ui/loading-overlay";
+import { useLoading } from "@/hooks/useLoading";
 
 const Paraphraser = () => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [tone, setTone] = useState("formal");
+  const { isLoading, withLoading } = useLoading();
 
   const handleParaphrase = async () => {
     if (!inputText.trim()) {
@@ -25,18 +27,18 @@ const Paraphraser = () => {
       return;
     }
 
-    setIsLoading(true);
-    
-    // Simulate API call with English-focused processing
-    setTimeout(() => {
+    await withLoading(async () => {
+      // Simulate API call with English-focused processing
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
       const mockOutput = generateMockParaphrase(inputText, tone);
       setOutputText(mockOutput);
-      setIsLoading(false);
+      
       toast({
         title: "Success!",
         description: "Text successfully paraphrased."
       });
-    }, 2000);
+    });
   };
 
   const generateMockParaphrase = (text: string, selectedTone: string) => {
@@ -101,6 +103,7 @@ const Paraphraser = () => {
                   value={tone} 
                   onChange={(e) => setTone(e.target.value)}
                   className="px-3 py-1 border border-input rounded-md text-sm bg-background"
+                  disabled={isLoading}
                 >
                   <option value="formal">Formal</option>
                   <option value="casual">Casual</option>
@@ -110,35 +113,31 @@ const Paraphraser = () => {
               </div>
             </div>
             
-            <Textarea
-              placeholder="Enter your English text here to paraphrase..."
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              className="min-h-[300px] resize-none"
-            />
+            <LoadingOverlay isLoading={isLoading} message="Processing text...">
+              <Textarea
+                placeholder="Enter your English text here to paraphrase..."
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                className="min-h-[300px] resize-none"
+                disabled={isLoading}
+              />
+            </LoadingOverlay>
             
             <div className="flex justify-between items-center text-sm text-muted-foreground">
               <span>{inputText.length} characters</span>
               <span>Max: 5000 characters</span>
             </div>
             
-            <button
+            <LoadingButton
               onClick={handleParaphrase}
-              disabled={isLoading || !inputText.trim()}
-              className="w-full bg-primary text-primary-foreground py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center space-x-2"
+              loading={isLoading}
+              loadingText="Processing..."
+              disabled={!inputText.trim()}
+              className="w-full py-3 px-6 font-semibold"
             >
-              {isLoading ? (
-                <>
-                  <RefreshCw className="h-5 w-5 animate-spin" />
-                  <span>Processing...</span>
-                </>
-              ) : (
-                <>
-                  <Wand2 className="h-5 w-5" />
-                  <span>Paraphrase Text</span>
-                </>
-              )}
-            </button>
+              <Wand2 className="h-5 w-5 mr-2" />
+              Paraphrase Text
+            </LoadingButton>
           </motion.div>
 
           <motion.div
@@ -153,6 +152,7 @@ const Paraphraser = () => {
                 <button
                   onClick={copyToClipboard}
                   className="flex items-center space-x-2 text-primary hover:text-primary/80 transition-colors"
+                  disabled={isLoading}
                 >
                   <Copy className="h-4 w-4" />
                   <span className="text-sm">Copy</span>
@@ -160,15 +160,17 @@ const Paraphraser = () => {
               )}
             </div>
             
-            <div className="min-h-[300px] p-4 border border-input rounded-lg bg-muted/50">
-              {outputText ? (
-                <p className="text-foreground leading-relaxed">{outputText}</p>
-              ) : (
-                <p className="text-muted-foreground italic">
-                  Paraphrased text will appear here...
-                </p>
-              )}
-            </div>
+            <LoadingOverlay isLoading={isLoading} message="Generating paraphrase...">
+              <div className="min-h-[300px] p-4 border border-input rounded-lg bg-muted/50">
+                {outputText ? (
+                  <p className="text-foreground leading-relaxed">{outputText}</p>
+                ) : (
+                  <p className="text-muted-foreground italic">
+                    Paraphrased text will appear here...
+                  </p>
+                )}
+              </div>
+            </LoadingOverlay>
             
             {outputText && (
               <div className="flex justify-between items-center text-sm text-muted-foreground">
