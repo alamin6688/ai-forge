@@ -4,11 +4,18 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
+import { BGPattern } from "@/components/ui/bg-pattern";
 
 const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 pt-20 pb-32">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+      <BGPattern 
+        variant="grid" 
+        mask="fade-edges" 
+        size={40} 
+        fill="hsl(var(--primary) / 0.1)" 
+        className="opacity-30"
+      />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center">
