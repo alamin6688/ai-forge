@@ -2,25 +2,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Upload, Wand2, Download } from "lucide-react";
+import { Upload, Wand2, Download, ArrowRight } from "lucide-react";
 
 const steps = [
   {
     icon: Upload,
     title: "Input Your Content",
-    description: "আপনার বাংলা বা English content paste করুন অথবা type করুন।",
+    description: "Paste or type your Bengali or English content into our easy-to-use interface.",
     step: "01"
   },
   {
     icon: Wand2,
     title: "AI Processing",
-    description: "আমাদের advanced AI আপনার content analyze করে perfect output তৈরি করে।",
+    description: "Our advanced AI analyzes your content and creates the perfect output instantly.",
     step: "02"
   },
   {
     icon: Download,
     title: "Get Results",
-    description: "Instant results পান এবং copy করে আপনার কাজে ব্যবহার করুন।",
+    description: "Receive instant results and copy them for immediate use in your projects.",
     step: "03"
   }
 ];
@@ -40,7 +40,7 @@ const HowItWorks = () => {
             How It Works
           </h2>
           <p className="text-xl text-gray-600">
-            ৩টি সহজ step এ আপনার content ready করুন
+            Get your content ready in 3 simple steps
           </p>
         </motion.div>
 
@@ -76,7 +76,9 @@ const HowItWorks = () => {
 
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 right-0 transform translate-x-1/2 -translate-y-1/2 z-10">
-                  <div className="w-8 h-0.5 bg-blue-200"></div>
+                  <div className="w-8 h-8 bg-blue-200 rounded-full flex items-center justify-center">
+                    <ArrowRight className="h-4 w-4 text-blue-600" />
+                  </div>
                 </div>
               )}
             </motion.div>

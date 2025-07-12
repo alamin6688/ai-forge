@@ -2,26 +2,29 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { Star, User, Briefcase, GraduationCap } from "lucide-react";
 
 const testimonials = [
   {
-    name: "আহমেদ রহমান",
+    name: "Ahmed Rahman",
     role: "Content Creator",
-    content: "এই টুলগুলো আমার কাজকে অনেক সহজ করে দিয়েছে। বাংলা প্যারাফ্রেজিং টুলটি দুর্দান্ত!",
+    content: "These tools have made my work so much easier. The Bengali paraphrasing tool is fantastic!",
     rating: 5,
+    icon: User,
   },
   {
     name: "Sarah Khan",
-    role: "Digital Marketer",
+    role: "Digital Marketer", 
     content: "The caption generator saves me hours of work. Perfect for social media campaigns!",
     rating: 5,
+    icon: Briefcase,
   },
   {
-    name: "মোহাম্মদ আলী",
+    name: "Mohammad Ali",
     role: "Student",
-    content: "Summarizer টুলটি আমার পড়াশোনায় অনেক সাহায্য করেছে। খুবই কার্যকর!",
+    content: "The summarizer tool has helped me tremendously with my studies. Very effective!",
     rating: 5,
+    icon: GraduationCap,
   },
 ];
 
@@ -40,32 +43,40 @@ const TestimonialsSection = () => {
             What Our Users Say
           </h2>
           <p className="text-xl text-gray-600">
-            আমাদের ব্যবহারকারীদের মতামত
+            Real feedback from our community of content creators
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <div className="flex items-center mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
-              <div>
-                <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
-                <p className="text-gray-600 text-sm">{testimonial.role}</p>
-              </div>
-            </motion.div>
-          ))}
+          {testimonials.map((testimonial, index) => {
+            const IconComponent = testimonial.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300"
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                    <IconComponent className="h-5 w-5 text-blue-600" />
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
+                <div>
+                  <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
+                  <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
