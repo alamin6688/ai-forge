@@ -100,3 +100,14 @@ html {
     opacity: .5;
   }
 }
+
+/* 3D Carousel utilities */
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+@layer utilities {
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+}
