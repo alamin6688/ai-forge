@@ -12,10 +12,11 @@ import Header from '../components/Layout/Header';
 import Footer from '../components/Layout/Footer';
 import { PageLoader } from '@/components/ui/page-loader';
 import { CardLoader } from '@/components/ui/card-loader';
+import { useAuth } from '@/hooks/useAuth';
 
 const Tools = () => {
   const navigate = useNavigate();
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const [userPlan, setUserPlan] = useState('free');
   const [userCredits, setUserCredits] = useState(10);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -26,37 +27,39 @@ const Tools = () => {
   const [isInitialLoading, setIsInitialLoading] = useState(true);
   const [isToolsLoading, setIsToolsLoading] = useState(false);
 
-  // Mock auth check - replace with your actual auth logic
   useEffect(() => {
     const initializeApp = async () => {
-      // Simulate initial app loading
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      // Check authentication status
-      const token = localStorage.getItem('authToken');
-      setIsAuthenticated(!!token);
-      
-      // Mock user data - replace with actual API calls
-      if (token) {
-        setUserPlan('free'); // or 'pro'
-        setUserCredits(10);
+      // Wait for auth to be determined
+      if (!authLoading) {
+        // Simulate initial app loading
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Mock user data - replace with actual API calls
+        if (isAuthenticated) {
+          setUserPlan('free'); // or 'pro'
+          setUserCredits(10);
+        }
+        
+        setIsInitialLoading(false);
       }
-      
-      setIsInitialLoading(false);
     };
 
     initializeApp();
-  }, []);
+  }, [authLoading, isAuthenticated]);
 
   const handleToolClick = async (tool) => {
+    console.log('Tool clicked:', tool.name, 'Auth required:', tool.authRequired, 'Is authenticated:', isAuthenticated);
+    
     // Check authentication requirement
     if (tool.authRequired && !isAuthenticated) {
+      console.log('Redirecting to login - user not authenticated');
       navigate('/auth/login');
       return;
     }
 
     // Check plan requirement
     if (tool.plan === 'pro' && userPlan === 'free') {
+      console.log('Showing upgrade modal - tool requires pro plan');
       setSelectedTool(tool);
       setShowUpgradeModal(true);
       return;
@@ -64,11 +67,14 @@ const Tools = () => {
 
     // Check credits requirement
     if (tool.requiresCredits && userCredits === 0) {
+      console.log('Showing credits modal - no credits available');
       setSelectedTool(tool);
       setShowCreditsModal(true);
       return;
     }
 
+    console.log('Opening tool:', tool.name);
+    
     // Simulate loading when opening tool
     if (tool.openInModal) {
       setIsToolsLoading(true);
@@ -84,7 +90,7 @@ const Tools = () => {
     }
   };
 
-  if (isInitialLoading) {
+  if (authLoading || isInitialLoading) {
     return <PageLoader message="Loading AI Tools..." />;
   }
 
@@ -107,6 +113,12 @@ const Tools = () => {
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Discover powerful AI tools to enhance your productivity and creativity
             </p>
+            {/* Debug info - remove in production */}
+            <div className="mt-4 text-sm text-gray-500">
+              Auth Status: {isAuthenticated ? 'Logged In' : 'Not Logged In'} | 
+              Plan: {userPlan} | 
+              Credits: {userCredits}
+            </div>
           </motion.div>
 
           {/* Tools Grid with Loading */}
