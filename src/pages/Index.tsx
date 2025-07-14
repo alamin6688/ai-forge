@@ -1,6 +1,5 @@
 
 import HeroSection from "../components/Home/HeroSection";
-import Tools3DCarousel from "../components/Home/Tools3DCarousel";
 import FeaturedTools from "../components/Home/FeaturedTools";
 import HowItWorks from "../components/Home/HowItWorks";
 import TestimonialsSection from "../components/Home/TestimonialsSection";
@@ -15,7 +14,6 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <Tools3DCarousel />
         <FeaturedTools />
         <ContentShowcase />
         <AICapabilities />
