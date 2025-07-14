@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/hooks/useAuth";
 import Header from "../../components/Layout/Header";
 
 const DotMap = () => {
@@ -179,6 +180,9 @@ const SignUp = () => {
     confirmPassword: ""
   });
   const [isHovered, setIsHovered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  
+  const { signup, signInWithGoogle } = useAuth();
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData(prev => ({
@@ -187,13 +191,35 @@ const SignUp = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords don't match!");
       return;
     }
-    console.log("Sign up attempt with:", formData);
+    
+    setIsLoading(true);
+    
+    try {
+      await signup(formData.email, formData.password, formData.name);
+    } catch (error) {
+      console.error("Signup error:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleGoogleSignUp = async () => {
+    setIsLoading(true);
+    
+    try {
+      await signInWithGoogle();
+    } catch (error) {
+      console.error("Google sign up error:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -255,8 +281,9 @@ const SignUp = () => {
               
               <div className="mb-6">
                 <button 
-                  className="w-full flex items-center justify-center gap-2 bg-gray-50 border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-all duration-300 text-gray-700 shadow-sm"
-                  onClick={() => console.log("Google sign-up")}
+                  className="w-full flex items-center justify-center gap-2 bg-gray-50 border border-gray-200 rounded-lg p-3 hover:bg-gray-100 transition-all duration-300 text-gray-700 shadow-sm disabled:opacity-50"
+                  onClick={handleGoogleSignUp}
+                  disabled={isLoading}
                 >
                   <svg className="h-5 w-5" viewBox="0 0 24 24">
                     <path
@@ -304,6 +331,7 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     placeholder="Enter your full name"
                     required
+                    disabled={isLoading}
                     className="bg-gray-50 border-gray-200 placeholder:text-gray-400 text-gray-800 w-full focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
@@ -320,6 +348,7 @@ const SignUp = () => {
                     onChange={handleInputChange}
                     placeholder="Enter your email address"
                     required
+                    disabled={isLoading}
                     className="bg-gray-50 border-gray-200 placeholder:text-gray-400 text-gray-800 w-full focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
@@ -337,6 +366,7 @@ const SignUp = () => {
                       onChange={handleInputChange}
                       placeholder="Enter your password"
                       required
+                      disabled={isLoading}
                       className="bg-gray-50 border-gray-200 placeholder:text-gray-400 text-gray-800 w-full pr-10 focus:border-blue-500 focus:ring-blue-500"
                     />
                     <button
@@ -362,6 +392,7 @@ const SignUp = () => {
                       onChange={handleInputChange}
                       placeholder="Confirm your password"
                       required
+                      disabled={isLoading}
                       className="bg-gray-50 border-gray-200 placeholder:text-gray-400 text-gray-800 w-full pr-10 focus:border-blue-500 focus:ring-blue-500"
                     />
                     <button
@@ -383,13 +414,14 @@ const SignUp = () => {
                 >
                   <Button
                     type="submit"
+                    disabled={isLoading}
                     className={cn(
                       "w-full bg-gradient-to-r relative overflow-hidden from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white py-2 rounded-lg transition-all duration-300",
                       isHovered ? "shadow-lg shadow-blue-200" : ""
                     )}
                   >
                     <span className="flex items-center justify-center">
-                      Create Account
+                      {isLoading ? "Creating Account..." : "Create Account"}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </span>
                     {isHovered && (

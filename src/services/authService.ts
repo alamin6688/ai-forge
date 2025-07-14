@@ -1,6 +1,15 @@
 
-import { apiRequest } from '@/lib/api';
-import { getAuthHeaders, AuthTokens, User } from '@/lib/auth';
+import { 
+  signInWithEmailAndPassword, 
+  createUserWithEmailAndPassword, 
+  signOut, 
+  updateProfile,
+  User as FirebaseUser,
+  GoogleAuthProvider,
+  signInWithPopup
+} from 'firebase/auth';
+import { auth } from '@/lib/firebase';
+import { User } from '@/lib/auth';
 
 export interface LoginCredentials {
   email: string;
@@ -13,53 +22,147 @@ export interface SignupCredentials {
   name?: string;
 }
 
+const convertFirebaseUser = (firebaseUser: FirebaseUser): User => ({
+  id: firebaseUser.uid,
+  email: firebaseUser.email || '',
+  name: firebaseUser.displayName || undefined,
+  avatar: firebaseUser.photoURL || undefined,
+  role: 'user',
+  createdAt: firebaseUser.metadata.creationTime || new Date().toISOString(),
+});
+
 export const authService = {
   // Login user
   async login(credentials: LoginCredentials) {
-    const response = await apiRequest<{ user: User; token: string }>('/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-    });
-
-    if (response.success && response.data) {
-      AuthTokens.set(response.data.token);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth, 
+        credentials.email, 
+        credentials.password
+      );
+      
+      const user = convertFirebaseUser(userCredential.user);
+      
+      return {
+        success: true,
+        data: { user, token: await userCredential.user.getIdToken() }
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Login failed'
+      };
     }
-
-    return response;
   },
 
   // Register new user
   async signup(credentials: SignupCredentials) {
-    const response = await apiRequest<{ user: User; token: string }>('/auth/signup', {
-      method: 'POST',
-      body: JSON.stringify(credentials),
-    });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth, 
+        credentials.email, 
+        credentials.password
+      );
 
-    if (response.success && response.data) {
-      AuthTokens.set(response.data.token);
+      // Update the user's display name if provided
+      if (credentials.name) {
+        await updateProfile(userCredential.user, {
+          displayName: credentials.name
+        });
+      }
+
+      const user = convertFirebaseUser(userCredential.user);
+      
+      return {
+        success: true,
+        data: { user, token: await userCredential.user.getIdToken() }
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Signup failed'
+      };
     }
+  },
 
-    return response;
+  // Google Sign In
+  async signInWithGoogle() {
+    try {
+      const provider = new GoogleAuthProvider();
+      const userCredential = await signInWithPopup(auth, provider);
+      
+      const user = convertFirebaseUser(userCredential.user);
+      
+      return {
+        success: true,
+        data: { user, token: await userCredential.user.getIdToken() }
+      };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Google sign in failed'
+      };
+    }
   },
 
   // Get current user
   async getCurrentUser() {
-    return apiRequest<User>('/auth/me', {
-      headers: getAuthHeaders(),
-    });
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const user = convertFirebaseUser(currentUser);
+        return {
+          success: true,
+          data: user
+        };
+      } else {
+        return {
+          success: false,
+          error: 'No user logged in'
+        };
+      }
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Failed to get current user'
+      };
+    }
   },
 
   // Logout user
   async logout() {
-    AuthTokens.remove();
-    return { success: true };
+    try {
+      await signOut(auth);
+      return { success: true };
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Logout failed'
+      };
+    }
   },
 
   // Refresh token
   async refreshToken() {
-    return apiRequest<{ token: string }>('/auth/refresh', {
-      method: 'POST',
-      headers: getAuthHeaders(),
-    });
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const token = await currentUser.getIdToken(true);
+        return {
+          success: true,
+          data: { token }
+        };
+      } else {
+        return {
+          success: false,
+          error: 'No user logged in'
+        };
+      }
+    } catch (error: any) {
+      return {
+        success: false,
+        error: error.message || 'Token refresh failed'
+      };
+    }
   },
 };
