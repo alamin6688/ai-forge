@@ -5,6 +5,7 @@ import HowItWorks from "../components/Home/HowItWorks";
 import TestimonialsSection from "../components/Home/TestimonialsSection";
 import ContentShowcase from "../components/Home/ContentShowcase";
 import AICapabilities from "../components/Home/AICapabilities";
+import WhyDifferentSection from "../components/Home/WhyDifferentSection";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 
@@ -17,6 +18,7 @@ const Index = () => {
         <FeaturedTools />
         <ContentShowcase />
         <AICapabilities />
+        <WhyDifferentSection />
         <HowItWorks />
         <TestimonialsSection />
       </main>
