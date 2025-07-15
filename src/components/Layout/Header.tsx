@@ -14,6 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,7 +25,7 @@ const Header = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6 }}
-      className="bg-white/95 backdrop-blur-sm border-b border-border sticky top-0 z-50"
+      className="bg-background/95 backdrop-blur-sm border-b border-border sticky top-0 z-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -49,6 +50,7 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
+            <ThemeToggle />
             {isAuthenticated && user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -57,7 +59,7 @@ const Header = () => {
                     <span>{user.name || user.email}</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end">
+                <DropdownMenuContent align="end" className="bg-background border-border">
                   <DropdownMenuItem>
                     <User className="mr-2 h-4 w-4" />
                     Profile
@@ -85,7 +87,7 @@ const Header = () => {
           </div>
 
           <button
-            className="md:hidden"
+            className="md:hidden text-foreground"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -112,6 +114,10 @@ const Header = () => {
               <Link to="/pricing" className="text-foreground hover:text-primary transition-colors">
                 Pricing
               </Link>
+              <div className="flex items-center justify-between pt-2">
+                <span className="text-foreground text-sm">Theme</span>
+                <ThemeToggle />
+              </div>
               <div className="flex flex-col space-y-2 pt-2">
                 {isAuthenticated && user ? (
                   <>
