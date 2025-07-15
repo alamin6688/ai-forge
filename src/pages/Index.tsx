@@ -2,7 +2,6 @@
 import HeroSection from "../components/Home/HeroSection";
 import FeaturedTools from "../components/Home/FeaturedTools";
 import HowItWorks from "../components/Home/HowItWorks";
-import TestimonialsSection from "../components/Home/TestimonialsSection";
 import ContentShowcase from "../components/Home/ContentShowcase";
 import AICapabilities from "../components/Home/AICapabilities";
 import WhyDifferentSection from "../components/Home/WhyDifferentSection";
@@ -20,7 +19,6 @@ const Index = () => {
         <AICapabilities />
         <WhyDifferentSection />
         <HowItWorks />
-        <TestimonialsSection />
       </main>
       <Footer />
     </div>
