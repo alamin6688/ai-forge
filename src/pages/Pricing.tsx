@@ -133,8 +133,8 @@ const Pricing = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                  className={`relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                    plan.popular ? `border-2 ${plan.borderColor} scale-105` : 'border border-gray-200'
+                  className={`relative bg-card rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border ${
+                    plan.popular ? `border-primary scale-105` : 'border-border'
                   }`}
                 >
                   {plan.popular && (
@@ -150,11 +150,11 @@ const Pricing = () => {
                     <div className={`inline-flex p-3 rounded-full ${plan.bgColor} mb-4`}>
                       <IconComponent className={`h-8 w-8 ${plan.color}`} />
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                    <h3 className="text-2xl font-bold text-card-foreground mb-2">
                       {plan.name}
                     </h3>
                     <div className="mb-4">
-                      <span className="text-4xl font-bold text-foreground">{plan.price}</span>
+                      <span className="text-4xl font-bold text-card-foreground">{plan.price}</span>
                       <span className="text-muted-foreground">{plan.period}</span>
                     </div>
                     <p className="text-muted-foreground">{plan.description}</p>
@@ -164,7 +164,7 @@ const Pricing = () => {
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start">
                         <Check className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />
-                        <span className="text-foreground">{feature}</span>
+                        <span className="text-card-foreground">{feature}</span>
                       </li>
                     ))}
                   </ul>
@@ -206,19 +206,19 @@ const Pricing = () => {
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-lg overflow-hidden"
+            className="bg-card rounded-2xl shadow-lg overflow-hidden border border-border"
           >
             {comparisonFeatures.map((category, categoryIndex) => (
-              <div key={categoryIndex} className="border-b border-gray-200 last:border-b-0">
-                <div className="bg-gray-50 px-6 py-4">
-                  <h3 className="text-lg font-semibold text-foreground">{category.category}</h3>
+              <div key={categoryIndex} className="border-b border-border last:border-b-0">
+                <div className="bg-muted px-6 py-4">
+                  <h3 className="text-lg font-semibold text-card-foreground">{category.category}</h3>
                 </div>
                 {category.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-gray-100 last:border-b-0">
-                    <div className="font-medium text-foreground">{feature.name}</div>
+                  <div key={featureIndex} className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-border last:border-b-0">
+                    <div className="font-medium text-card-foreground">{feature.name}</div>
                     <div className="text-center text-muted-foreground">{feature.free}</div>
-                    <div className="text-center text-blue-600 font-medium">{feature.starter}</div>
-                    <div className="text-center text-purple-600 font-medium">{feature.pro}</div>
+                    <div className="text-center text-primary font-medium">{feature.starter}</div>
+                    <div className="text-center text-primary font-medium">{feature.pro}</div>
                   </div>
                 ))}
               </div>
@@ -265,8 +265,8 @@ const Pricing = () => {
                 a: "Yes, you can upgrade or downgrade your plan at any time from your dashboard."
               }
             ].map((faq, index) => (
-              <div key={index} className="bg-white rounded-lg p-6 shadow-sm">
-                <h4 className="font-semibold text-foreground mb-2">{faq.q}</h4>
+              <div key={index} className="bg-card rounded-lg p-6 shadow-sm border border-border">
+                <h4 className="font-semibold text-card-foreground mb-2">{faq.q}</h4>
                 <p className="text-muted-foreground">{faq.a}</p>
               </div>
             ))}
@@ -274,7 +274,7 @@ const Pricing = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="bg-gradient-to-r from-primary to-blue-600 py-16">
+        <section className="gradient-bg py-16">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <motion.div
               initial={{ opacity: 0, y: 50 }}
@@ -282,13 +282,13 @@ const Pricing = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl font-bold text-white mb-4">
+              <h2 className="text-3xl font-bold text-primary-foreground mb-4">
                 Ready to get started?
               </h2>
-              <p className="text-xl text-blue-100 mb-8">
+              <p className="text-xl text-primary-foreground/90 mb-8">
                 Start creating better content today and boost your productivity
               </p>
-              <button className="bg-white text-primary px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors">
+              <button className="bg-background text-foreground px-8 py-3 rounded-xl font-semibold hover:bg-background/90 transition-colors">
                 Start Free Trial
               </button>
             </motion.div>

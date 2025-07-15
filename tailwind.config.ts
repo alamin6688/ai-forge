@@ -65,6 +65,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Custom theme-aware colors
+				'hero-gradient': {
+					from: 'hsl(var(--hero-gradient-from))',
+					to: 'hsl(var(--hero-gradient-to))'
+				},
+				'section': {
+					bg: 'hsl(var(--section-bg))',
+					'bg-alt': 'hsl(var(--section-bg-alt))'
 				}
 			},
 			borderRadius: {

@@ -14,11 +14,21 @@ const Index = () => {
       <Header />
       <main>
         <HeroSection />
-        <FeaturedTools />
-        <ContentShowcase />
-        <AICapabilities />
-        <WhyDifferentSection />
-        <HowItWorks />
+        <div className="section-bg">
+          <FeaturedTools />
+        </div>
+        <div className="section-bg-alt">
+          <ContentShowcase />
+        </div>
+        <div className="section-bg">
+          <AICapabilities />
+        </div>
+        <div className="section-bg-alt">
+          <WhyDifferentSection />
+        </div>
+        <div className="section-bg">
+          <HowItWorks />
+        </div>
       </main>
       <Footer />
     </div>

@@ -95,10 +95,10 @@ const Tools = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-background">
       <Header />
       
-      <div className="flex-1 bg-gradient-to-br from-blue-50 to-indigo-100 py-12">
+      <div className="flex-1 section-bg py-12">
         <div className="container mx-auto px-4">
           {/* Header */}
           <motion.div
@@ -107,14 +107,14 @@ const Tools = () => {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               AI Tools Collection
             </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
               Discover powerful AI tools to enhance your productivity and creativity
             </p>
             {/* Debug info - remove in production */}
-            <div className="mt-4 text-sm text-gray-500">
+            <div className="mt-4 text-sm text-muted-foreground">
               Auth Status: {isAuthenticated ? 'Logged In' : 'Not Logged In'} | 
               Plan: {userPlan} | 
               Credits: {userCredits}
@@ -140,13 +140,13 @@ const Tools = () => {
 
           {/* Upgrade Modal */}
           <Dialog open={showUpgradeModal} onOpenChange={setShowUpgradeModal}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md bg-card border-border">
               <DialogHeader>
-                <DialogTitle className="flex items-center">
+                <DialogTitle className="flex items-center text-card-foreground">
                   <Star className="h-5 w-5 mr-2 text-yellow-500" />
                   Upgrade Required
                 </DialogTitle>
-                <DialogDescription>
+                <DialogDescription className="text-muted-foreground">
                   {selectedTool && (
                     <>
                       <strong>{selectedTool.name}</strong> is a Pro feature. Upgrade your plan to access this tool and unlock all premium features.
@@ -160,7 +160,7 @@ const Tools = () => {
                 </Button>
                 <Button 
                   onClick={() => navigate('/pricing')}
-                  className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+                  className="gradient-bg text-primary-foreground"
                 >
                   Upgrade Plan
                 </Button>
@@ -170,13 +170,13 @@ const Tools = () => {
 
           {/* Credits Modal */}
           <Dialog open={showCreditsModal} onOpenChange={setShowCreditsModal}>
-            <DialogContent className="sm:max-w-md">
+            <DialogContent className="sm:max-w-md bg-card border-border">
               <DialogHeader>
-                <DialogTitle className="flex items-center">
+                <DialogTitle className="flex items-center text-card-foreground">
                   <CreditCard className="h-5 w-5 mr-2 text-blue-500" />
                   No Credits Available
                 </DialogTitle>
-                <DialogDescription>
+                <DialogDescription className="text-muted-foreground">
                   You need credits to use <strong>{selectedTool?.name}</strong>. Buy more credits or upgrade your plan for unlimited usage.
                 </DialogDescription>
               </DialogHeader>
@@ -186,7 +186,7 @@ const Tools = () => {
                 </Button>
                 <Button 
                   onClick={() => navigate('/pricing')}
-                  className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+                  className="gradient-bg text-primary-foreground"
                 >
                   Buy Credits
                 </Button>
