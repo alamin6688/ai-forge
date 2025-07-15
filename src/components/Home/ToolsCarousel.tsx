@@ -42,7 +42,7 @@ const ToolsCarousel = () => {
   const getPlanBadge = (plan: string, isFree: boolean) => {
     if (isFree) {
       return (
-        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-300">
           Free
         </span>
       );
@@ -55,7 +55,7 @@ const ToolsCarousel = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-background">
+    <section className="py-20 section-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -64,10 +64,10 @@ const ToolsCarousel = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
             Powerful <span className="gradient-text">AI Tools</span> at Your Fingertips
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Discover our comprehensive suite of AI-powered tools designed to enhance your English content creation, 
             from paraphrasing and summarizing to generating creative content.
           </p>
@@ -91,7 +91,7 @@ const ToolsCarousel = () => {
                     viewport={{ once: true }}
                     className="h-full"
                   >
-                    <Card className="h-full hover:shadow-xl transition-all duration-300 group border-0 bg-white/80 backdrop-blur-sm hover:bg-white dark:bg-gray-800/80 dark:hover:bg-gray-800">
+                    <Card className="h-full hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 group border-border bg-card/80 backdrop-blur-sm hover:bg-card">
                       <div className="relative overflow-hidden rounded-t-lg">
                         <img
                           src={getToolImage(tool.slug)}
@@ -109,23 +109,23 @@ const ToolsCarousel = () => {
                       
                       <CardHeader className="pb-3">
                         <div className="flex items-center justify-between">
-                          <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-primary transition-colors">
+                          <CardTitle className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
                             {tool.name}
                           </CardTitle>
                         </div>
-                        <CardDescription className="text-gray-600 dark:text-gray-300 line-clamp-2">
+                        <CardDescription className="text-muted-foreground line-clamp-2">
                           {tool.description}
                         </CardDescription>
                       </CardHeader>
                       
                       <CardContent className="pt-0">
                         <div className="mb-4">
-                          <p className="text-sm text-gray-500 dark:text-gray-400 mb-2">Key Features:</p>
+                          <p className="text-sm text-muted-foreground mb-2">Key Features:</p>
                           <div className="flex flex-wrap gap-1">
                             {tool.features.slice(0, 2).map((feature, idx) => (
                               <span
                                 key={idx}
-                                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
+                                className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-muted text-muted-foreground"
                               >
                                 {feature}
                               </span>
@@ -135,7 +135,7 @@ const ToolsCarousel = () => {
                         
                         <Link
                           to={tool.openInModal ? "/tools" : `/tools/${tool.slug}`}
-                          className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary/90 rounded-lg transition-colors group-hover:bg-primary/80"
+                          className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90 rounded-lg transition-colors group-hover:bg-primary/80"
                         >
                           Try {tool.name}
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -146,8 +146,8 @@ const ToolsCarousel = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="hidden md:flex -left-12" />
-            <CarouselNext className="hidden md:flex -right-12" />
+            <CarouselPrevious className="hidden md:flex -left-12 border-border bg-background text-foreground hover:bg-muted" />
+            <CarouselNext className="hidden md:flex -right-12 border-border bg-background text-foreground hover:bg-muted" />
           </Carousel>
         </motion.div>
 
@@ -160,7 +160,7 @@ const ToolsCarousel = () => {
         >
           <Link
             to="/tools"
-            className="inline-flex items-center px-8 py-4 text-lg font-semibold text-primary border-2 border-primary rounded-xl hover:bg-primary hover:text-white transition-all duration-200 transform hover:scale-105"
+            className="inline-flex items-center px-8 py-4 text-lg font-semibold text-primary border-2 border-primary rounded-xl hover:bg-primary hover:text-primary-foreground transition-all duration-200 transform hover:scale-105"
           >
             Explore All Tools
             <ArrowRight className="ml-2 h-5 w-5" />

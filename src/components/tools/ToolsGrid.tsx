@@ -111,44 +111,44 @@ const ToolCard = ({
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className={cn(
-        "flex flex-col lg:border-r py-8 relative group/feature cursor-pointer bg-white/80 backdrop-blur-sm hover:bg-white transition-all duration-300",
+        "flex flex-col lg:border-r py-8 relative group/feature cursor-pointer bg-card/80 backdrop-blur-sm hover:bg-card transition-all duration-300 border-border",
         isFirstColumn && "lg:border-l",
         !isLastRow && "lg:border-b",
-        "border-gray-200 hover:shadow-lg"
+        "hover:shadow-lg dark:hover:shadow-2xl"
       )}
       onClick={() => onToolClick(tool)}
     >
       {/* Hover background effect */}
       {!isLastRow && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-blue-50/50 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-t from-primary/10 to-transparent pointer-events-none" />
       )}
       {isLastRow && (
-        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-blue-50/50 to-transparent pointer-events-none" />
+        <div className="opacity-0 group-hover/feature:opacity-100 transition duration-200 absolute inset-0 h-full w-full bg-gradient-to-b from-primary/10 to-transparent pointer-events-none" />
       )}
 
       {/* Tool Icon */}
-      <div className="mb-4 relative z-10 px-8 text-gray-600 flex justify-center">
-        <div className="text-4xl group-hover/feature:scale-110 transition-transform duration-200">
+      <div className="mb-4 relative z-10 px-8 text-muted-foreground flex justify-center">
+        <div className="text-4xl group-hover/feature:scale-110 transition-transform duration-200 group-hover/feature:text-primary">
           {tool.icon}
         </div>
       </div>
 
       {/* Tool Title */}
       <div className="text-lg font-bold mb-2 relative z-10 px-8">
-        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-gray-300 group-hover/feature:bg-blue-500 transition-all duration-200 origin-center" />
-        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-gray-800 text-center block">
+        <div className="absolute left-0 inset-y-0 h-6 group-hover/feature:h-8 w-1 rounded-tr-full rounded-br-full bg-border group-hover/feature:bg-primary transition-all duration-200 origin-center" />
+        <span className="group-hover/feature:translate-x-2 transition duration-200 inline-block text-foreground text-center block">
           {tool.name}
         </span>
       </div>
 
       {/* Tool Description */}
-      <p className="text-sm text-gray-600 mb-4 relative z-10 px-8 text-center flex-grow">
+      <p className="text-sm text-muted-foreground mb-4 relative z-10 px-8 text-center flex-grow">
         {tool.description}
       </p>
 
       {/* Category and Status */}
       <div className="mb-4 relative z-10 px-8 flex justify-center space-x-2">
-        <Badge variant="outline" className="text-xs">
+        <Badge variant="outline" className="text-xs border-border text-muted-foreground">
           {tool.category}
         </Badge>
         <Badge variant={getBadgeVariant(tool) as any} className="text-xs">
@@ -157,7 +157,7 @@ const ToolCard = ({
       </div>
 
       {/* Tool Features */}
-      <div className="mb-4 relative z-10 px-8 flex justify-center items-center space-x-3 text-sm text-gray-500">
+      <div className="mb-4 relative z-10 px-8 flex justify-center items-center space-x-3 text-sm text-muted-foreground">
         {tool.requiresCredits && (
           <div className="flex items-center">
             <Zap className="h-4 w-4 mr-1" />
@@ -183,7 +183,7 @@ const ToolCard = ({
         <Button 
           variant="default" 
           size="sm"
-          className="w-full bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 group-hover/feature:shadow-lg transition-shadow duration-200"
+          className="w-full bg-primary hover:bg-primary/90 text-primary-foreground group-hover/feature:shadow-lg transition-shadow duration-200"
         >
           {tool.openInModal ? 'Try Now' : 'Open Tool'}
         </Button>
